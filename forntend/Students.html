@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Students</title>
+</head>
+<body>
+    <header class="top-header">
+
+     <div class="logo-section">
+         <span>🎓</span>
+         <h2>Student Management System</h2>
+     </div>
+
+     <div class="profile">
+         <div class="profile-icon">👤</div>
+
+         <span>Admin</span>
+
+         <span class="arrow"></span>
+     </div>
+     
+
+    </header>
+    <aside class="side-bar">
+        <nav class="navigation">
+            <a href="index.html" class="nav-item">🏠   Dashboard</a>
+            <a href="Students.html" class="nav-item">👥   Students</a>
+            <a href="#" class="nav-item">📚   Subject</a>
+            <a href="settings.html" class="nav-item settings-item">⚙️   Settings</a>
+        </nav>
+    </aside>
+    <main class="main-content">
+        <!-- ===Header=== -->
+        <div class="s1">
+            <div>
+             <h2>Students</h2>
+             <p>Manage and View all Students in system</p>
+            </div>
+            <button class="add-student">
+             <span>+</span>
+             Add Student
+            </button>
+        </div>
+
+        <!-- ===Search Tab=== -->
+       <div class="student-filters">
+         <div class="search-box">
+           <span>🔍</span>
+           <input type="text" placeholder="Search by name, roll no, or email...">
+         </div>
+
+         <div class="class-filter">
+           <span>⚱️</span>
+           <select>
+            <option>All Classes</option>
+            <option>BCA</option>
+            <option>BBA</option>
+            <option>BCom</option>
+            <option>MCA</option>
+           </select>
+         </div>
+       </div>
+       <!-- ===Student Table=== -->
+       <div class="student-table">
+
+         <table id="studentsTable">
+
+           <thead>
+              <tr>
+                 <th>ID</th>
+                 <th>Name</th>
+                 <th>Roll No</th>
+                 <th>Class</th>
+                 <th>Email</th>
+                 <th>Phone</th>
+                 <th>Actions</th>
+              </tr>
+           </thead>
+
+           <tbody id="studentTableBody">
+
+              <tr class="student-row" data-student-id="1">
+
+                 <td class="student-id">1</td>
+
+                 <td class="student-name">abc</td>
+
+                 <td class="student-roll">101</td>
+
+                 <td class="student-class">BCA</td>
+
+                 <td class="student-email">abc@example.com</td>
+
+                 <td class="student-phone">##</td>
+
+                 <td class="student-actions">
+                    <button class="view-btn" data-action="view">
+                        👁 View
+                    </button>
+
+                    <button class="edit-btn" data-action="edit">
+                        ✎ Edit
+                    </button>
+
+                    <button class="delete-btn" data-action="delete">
+                        🗑
+                    </button>
+                 </td>
+
+              </tr>
+
+           </tbody>
+
+         </table>
+
+</div>
+</body>
+</html>
