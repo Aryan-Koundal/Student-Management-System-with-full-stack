@@ -569,3 +569,140 @@ body {
     color: white;
     border: none;
 }
+
+/* ===Add Subject=== */
+
+.subject-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+
+    align-items: center;
+    justify-content: center;
+
+    z-index: 1100;
+}
+
+/* Modal Box */
+
+.subject-modal-content {
+    width: 500px;
+    max-width: 90%;
+    background: white;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Modal Header */
+
+.subject-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.subject-modal-header h2 {
+    margin: 0;
+    color: #172b4d;
+    font-size: 22px;
+}
+
+/* Close Button */
+
+.close-subject-modal {
+    border: none;
+    background: none;
+    font-size: 28px;
+    color: #718096;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.close-subject-modal:hover {
+    color: #172b4d;
+}
+
+/* Form */
+
+#subject-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* Form Group */
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #344563;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid #dce4ee;
+    border-radius: 6px;
+    outline: none;
+    font-size: 14px;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #287cf0;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+/* Form Buttons */
+
+.subject-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.cancel-btn {
+    background: white;
+    color: #344563;
+    border: 1px solid #dce4ee;
+    border-radius: 6px;
+    padding: 10px 18px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.cancel-btn:hover {
+    background: #f1f5f9;
+}
+
+.save-subject-btn {
+    background: #287cf0;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 18px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.save-subject-btn:hover {
+    background: #1769d5;
+}

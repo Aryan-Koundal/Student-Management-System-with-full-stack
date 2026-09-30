@@ -39,11 +39,69 @@
              <h2>Subjects</h2>
              <p>Manage and View all Subjects in system</p>
             </div>
-            <button class="add-student">
+            <button class="add-student" id="add-subject">
              <span>+</span>
-             Add Student
+             Add Subject
             </button>
         </div>
+        <!-- Add Subject Form -->
+       <div class="subject-modal" id="subject-modal">
+         <div class="subject-modal-content">
+
+          <div class="subject-modal-header">
+            <h2>Add New Subject</h2>
+            <button type="button" class="close-subject-modal" id="close-subject-modal">
+                &times;
+            </button>
+          </div>
+
+          <form id="subject-form">
+
+            <div class="form-group">
+                <label for="subject-name">Subject Name</label>
+                <input
+                    type="text"
+                    id="subject-name"
+                    name="subject_name"
+                    placeholder="Enter subject name"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="subject-code">Subject Code</label>
+                <input
+                    type="text"
+                    id="subject-code"
+                    name="subject_code"
+                    placeholder="Enter subject code"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="subject-description">Description</label>
+                <textarea
+                    id="subject-description"
+                    name="subject_description"
+                    placeholder="Enter subject description"
+                    rows="3"
+                ></textarea>
+            </div>
+
+            <div class="subject-form-actions">
+                <button type="button" id="cancel-subject" class="cancel-btn">
+                    Cancel
+                </button>
+
+                <button type="submit" class="save-subject-btn">
+                    Add Subject
+                </button>
+            </div>
+ 
+          </form>
+         </div>
+       </div>
          <!-- ===Search Tab=== -->
        <div class="student-filters">
          <div class="search-box">
@@ -112,6 +170,6 @@
            </tbody>
 
          </table>
+ <script src="script.js"></script>
 </body>
-<script src="script.js"></script>
 </html>
