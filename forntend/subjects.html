@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Subjects</title>
+</head>
+<body>
+    <header class="top-header">
+
+     <div class="logo-section">
+         <span>🎓</span>
+         <h2>Student Management System</h2>
+     </div>
+
+     <div class="profile">
+         <div class="profile-icon">👤</div>
+
+         <span>Admin</span>
+
+         <span class="arrow"></span>
+     </div>
+     
+
+    </header>
+    <aside class="side-bar">
+        <nav class="navigation">
+            <a href="index.html" class="nav-item">🏠   Dashboard</a>
+            <a href="Students.html" class="nav-item">👥   Students</a>
+            <a href="subjects.html" class="nav-item">📚   Subject</a>
+            <a href="settings.html" class="nav-item settings-item">⚙️   Settings</a>
+        </nav>
+    </aside>
+    <main class="main-content">
+        <!-- ===Header=== -->
+        <div class="s1">
+            <div>
+             <h2>Subjects</h2>
+             <p>Manage and View all Subjects in system</p>
+            </div>
+            <button class="add-student">
+             <span>+</span>
+             Add Student
+            </button>
+        </div>
+         <!-- ===Search Tab=== -->
+       <div class="student-filters">
+         <div class="search-box">
+           <span>🔍</span>
+           <input type="text" placeholder="Search by name, roll no, or email...">
+         </div>
+
+         <div class="class-filter">
+           <span>⚱️</span>
+           <select>
+            <option>All Classes</option>
+            <option>BCA</option>
+            <option>BBA</option>
+            <option>BCom</option>
+            <option>MCA</option>
+           </select>
+         </div>
+       </div>
+
+       <!-- ===Subject Table=== -->
+       <div class="subject-table">
+
+         <table id="subjectTable">
+
+           <thead>
+              <tr>
+                 <th>ID</th>
+                 <th>Subject Name</th>
+                 <th>Subject Code</th>
+                 <th>Type</th>
+                 <th>Class</th>
+                 <th>Actions</th>
+              </tr>
+           </thead>
+
+           <tbody id="subjectTableBody">
+
+              <tr class="subject-row" data-student-id="1">
+
+                 <td class="subject-id">1</td>
+
+                 <td class="subject-name">Programing</td>
+
+                 <td class="subject-code">101</td>
+
+                 <td class="subject-type">Pratical</td>
+
+                 <td class="subject-class">BCA</td>
+
+                 <td class="subject-actions">
+                    <button class="view-btn" data-action="view">
+                        👁 View
+                    </button>
+
+                    <button class="edit-btn" data-action="edit">
+                        ✎ Edit
+                    </button>
+
+                    <button class="delete-btn" data-action="delete">
+                        🗑
+                    </button>
+                 </td>
+
+              </tr>
+
+           </tbody>
+
+         </table>
+</body>
+<script src="script.js"></script>
+</html>
