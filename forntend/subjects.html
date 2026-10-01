@@ -57,6 +57,17 @@
 
           <form id="subject-form">
 
+            <!-- <div class="form-group">
+                <label for="subject-id">Subject Id</label>
+                <input
+                    type="text"
+                    id="subject-id"
+                    name="subject_id"
+                    placeholder="Enter subject id"
+                    required
+                >
+            </div> -->
+
             <div class="form-group">
                 <label for="subject-name">Subject Name</label>
                 <input
@@ -80,13 +91,22 @@
             </div>
 
             <div class="form-group">
-                <label for="subject-description">Description</label>
-                <textarea
-                    id="subject-description"
-                    name="subject_description"
-                    placeholder="Enter subject description"
-                    rows="3"
-                ></textarea>
+                <label for="subject-type">Type</label>
+                <input
+                    id="subject-type"
+                    name="subject_type"
+                    placeholder="Enter subject type"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="subject-class">Class</label>
+                <input
+                    id="subject-class"
+                    name="subject_class"
+                    placeholder="Enter subject class"
+                    required
+                >
             </div>
 
             <div class="subject-form-actions">
@@ -165,6 +185,7 @@
                     </button>
                  </td>
 
+              
               </tr>
 
            </tbody>
