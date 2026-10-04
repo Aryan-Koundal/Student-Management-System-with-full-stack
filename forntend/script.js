@@ -118,17 +118,17 @@ if (editStudent) {
 
 }
 // ===To open the edit form===
-console.log("table")
-if (studentTableBody){
-studentTableBody.addEventListener("click", function(event) {
-    if (event.target.classList.contains("edit-btn")) {
+// console.log("table")
+// if (studentTableBody){
+// studentTableBody.addEventListener("click", function(event) {
+//     if (event.target.classList.contains("edit-btn")) {
 
-        editStudent.style.display = "flex";
+//         editStudent.style.display = "flex";
 
-    }
+//     }
 
-});
-}
+// });
+// }
 
 // ===Edit student details===
 const editStudentName = document.getElementById("edit-student-name");
@@ -279,3 +279,66 @@ if (subjectForm){
 }
 
 // ===edit subject details===
+const editSubject = document.getElementById("edit-subject-modal");
+if(editSubject){
+    // const openEdit = document.querySelector(".edit-btn");
+    const closeEditModal = document.getElementById("close-edit-modal");
+    const cancelEditModal = document.getElementById("cancel-edit-modal");
+
+    closeEditModal.addEventListener("click",function(){
+        editSubject.style.display = "none";
+    })
+    cancelEditModal.addEventListener("click",function(){
+        editSubject.style.display = "none";
+    })
+
+    // openEdit.addEventListener("click",function(){
+    //     editStudent.style.display = "flex";
+    // })
+     
+}
+const editSubject_name = document.getElementById("edit-subject-name");
+const editSubject_code = document.getElementById("edit-subject-code");
+const editSubject_type = document.getElementById("edit-subject-type");
+const editSubject_class = document.getElementById("edit-subject-class");
+if(subjectTable){
+    subjectTable.addEventListener("click",function(event){
+        if(event.target.classList.contains("edit-btn")){
+            const row = event.target.closest("tr");
+            editingRow = row;
+            const subjectName = row.querySelector(".subject-name").textContent;
+            const subjectCode = row.querySelector(".subject-code").textContent;
+            const subjectType = row.querySelector(".subject-type").textContent;
+            const subjectClass = row.querySelector(".subject-class").textContent;
+            console.log(editSubject_name);
+            console.log(editSubject_code);
+            console.log(editSubject_type);
+            console.log(editSubject_class);
+
+            editSubject_name.value = subjectName;
+            editSubject_code.value = subjectCode;
+            editSubject_type.value = subjectType;
+            editSubject_class.value = subjectClass;
+
+
+            editSubject.style.display = "flex";
+        }
+    })
+}
+const editSubject_form = document.getElementById("edit-subject-form");
+if(subjectTable){
+    editSubject_form.addEventListener("submit",function(event){
+        event.preventDefault();
+        const newName = editSubject_name.value;
+        const newCode = editSubject_code.value;
+        const newType = editSubject_type.value;
+        const newClass = editSubject_class.value;
+
+        editingRow.querySelector(".subject-name").textContent = newName;
+        editingRow.querySelector(".subject-code").textContent = newCode;
+        editingRow.querySelector(".subject-type").textContent = newType;
+        editingRow.querySelector(".subject-class").textContent = newClass;
+
+        editSubject.style.display = "none";
+    });
+}
