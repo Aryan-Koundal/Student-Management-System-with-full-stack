@@ -1,10 +1,8 @@
 from flask import Blueprint
-# from 
 
-app = Blueprint("blue",__name__)
-
+blueprint = Blueprint("blue",__name__)
 
 
-@app.route("/")
+@blueprint.route("/")
 def home():
     return "Flask is working!"
