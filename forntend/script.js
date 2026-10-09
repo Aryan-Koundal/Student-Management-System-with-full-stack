@@ -49,6 +49,18 @@ if (studentForm){
         console.log(data.name);
         console.log(studentName.value);
 
+        // ===SENDING THE DATA TO THE BACKEND OF STUDENTS===
+        const response = await fetch("http://127.0.0.1:5000/students",{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json",
+        },
+        body:JSON.stringify(data),
+        });
+
+        const result = await response.json();
+        console.log(result);
+
         // ===Add the student details in the table===
         const newStudent = document.createElement("tr");
         newStudent.innerHTML=`
@@ -99,6 +111,14 @@ if (studentForm){
         );
         }
         });
+
+//    const response2 = fetch("http://127.0.0.1:5000/students",{
+//         method:"GET",
+//         headers:{
+//             "Content-Type":"application/json",
+//         },
+//         body:JSON.stringify(data),
+//     });
 }
 
 // ===To close the edit form===
@@ -225,6 +245,20 @@ if (subjectForm){
         };
         console.log(data.name);
         console.log(data);
+
+        // ===SENDING THE DATA TO THE BACKEND OF SUBJECTS===
+        const response = await fetch("http://127.0.0.1:5000/subjects",{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json",
+        },
+        body:JSON.stringify(data),
+        });
+
+        const result = await response.json();
+        console.log(result);
+
+
          // ===Add the subject details in the table===
         const newSubject = document.createElement("tr");
         newSubject.innerHTML=`

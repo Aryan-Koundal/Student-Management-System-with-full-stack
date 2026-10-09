@@ -5,10 +5,10 @@ from models.db import db
 def subject_controller():
     data = request.json
 
-    subject = data["SUBJECT_name"]
-    code = data["SUBJECT_code"]
-    type = data["SUBJECT_type"]
-    sub_class = data["class_name"]
+    subject = data["name"]
+    code = data["code"]
+    type = data["type"]
+    sub_class = data["class"]
 
     sub = Subject(
         SUBJECT_name = subject,
@@ -18,3 +18,7 @@ def subject_controller():
     )
     db.session.add(sub)
     db.session.commit()
+
+    return {
+        "message":"Added subject successfully !"
+    },200

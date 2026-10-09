@@ -22,3 +22,7 @@ def student_controller():
     db.session.add(st)
     db.session.commit()
 
+    return {
+        "message": "Successfully added student !"
+    },200
+
