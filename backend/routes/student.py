@@ -1,6 +1,6 @@
 # from flask import Blueprint
 from models.students import Student
-from controller.student_controller import student_controller
+from controller.student_controller import student_controller,old_students_controller,delete_student_controller
 from .routes_1 import blueprint
 from flask import jsonify
 
@@ -30,19 +30,24 @@ def student():
 #     return "Students printed in terminal"
 
 @blueprint.route("/students", methods=["GET"])
-def student1():
-    students = Student.query.all()
+def old_student():
+    return old_students_controller()
+    # students = Student.query.all()
 
-    student_list = []
+    # student_list = []
 
-    for i in students:
-        student_list.append({
-            "id": i.id,
-            "name": i.name,
-            "rollno": i.rollno,
-            "class_name": i.class_name,
-            "email": i.email,
-            "phone": i.phone
-        })
+    # for i in students:
+    #     student_list.append({
+    #         "id": i.id,
+    #         "name": i.name,
+    #         "rollno": i.rollno,
+    #         "class_name": i.class_name,
+    #         "email": i.email,
+    #         "phone": i.phone
+    #     })
 
-    return jsonify(student_list)
+    # return jsonify(student_list)
+
+@blueprint.route("/students/<int:student_id>",methods=["DELETE"])
+def delete_student(student_id):
+    return delete_student_controller(student_id)

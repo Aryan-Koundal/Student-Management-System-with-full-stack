@@ -1,7 +1,7 @@
 from flask import request
 from models.db import db
 from models.students import Student
-
+from flask import jsonify
 
 def student_controller():
     data = request.json
@@ -26,3 +26,33 @@ def student_controller():
         "message": "Successfully added student !"
     },200
 
+
+def old_students_controller():
+    students = Student.query.all()
+
+    student_list = []
+
+    for i in students:
+        student_list.append({
+            "id": i.id,
+            "name": i.name,
+            "rollno":i.rollno,
+            "class_name": i.class_name,
+            "email": i.email,
+            "phone": i.phone
+        })
+
+    return jsonify(student_list)
+
+def delete_student_controller(student_id):
+    student = db.session.get(Student,student_id)
+
+    if student is None:
+        return jsonify({"error": "Student not found"}), 404
+
+    db.session.delete(student)
+    db.session.commit()
+
+    return jsonify({
+        "message": "Student deleted successfully"
+        }), 200

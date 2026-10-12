@@ -1,3 +1,5 @@
+// const { createElement } = required("react");
+
 // === Add student popup window ===
 const addStudent = document.getElementById("add-student");
 if (addStudent) {
@@ -33,7 +35,35 @@ const studentClass = document.getElementById("student-class");
 const studentEmail = document.getElementById("student-email");
 const studentPhoneNo = document.getElementById("student-phone");
 const studentTableBody = document.getElementById("studentTableBody");
-console.log(studentForm);
+// console.log(studentForm);
+// ===GETTING THE STUDENTS FROM BACKEND===
+async function getStudents() {
+    if (!studentTableBody) return;
+    const response = await fetch("http://127.0.0.1:5000/students", {
+     method: "GET"
+    });
+    const students = await response.json();
+    console.log(students);
+    studentTableBody.innerHTML = "";
+    students.forEach(function(student) {
+        const Student = document.createElement("tr");
+        Student.innerHTML=`
+        <td class="student-id">${student.id}</td>
+        <td class="student-name">${student.name}</td>
+        <td class="student-roll">${student.rollno}</td>
+        <td class="student-class">${student.class}</td>
+        <td class="student-email">${student.email}</td>
+        <td class="student-phone">${student.phone}</td>
+        <td>
+        <button class="view-btn">👁View</button>
+        <button class="edit-btn">✎Edit</button>
+        <button class="delete-btn">🗑</button>
+        </td>
+        `;
+        studentTableBody.appendChild(Student);
+    });
+}
+getStudents();
 let studentId = 2;
 if (studentForm){
     studentForm.addEventListener("submit",async function(event){
@@ -80,12 +110,14 @@ if (studentForm){
         studentId ++;
     })
     // ===Remove or delete an Student===
-    studentTableBody.addEventListener("click", function(event) {
+    studentTableBody.addEventListener("click", async function(event) {
 
        if (event.target.classList.contains("delete-btn")) {
-
           const row = event.target.closest("tr");
-
+          const studentId = row.cells[0].textContent;
+          const response = await fetch(`http://127.0.0.1:5000/students/${studentId}`,{
+            method:"DELETE",
+          });
           row.remove();
         }
         });
@@ -112,13 +144,6 @@ if (studentForm){
         }
         });
 
-//    const response2 = fetch("http://127.0.0.1:5000/students",{
-//         method:"GET",
-//         headers:{
-//             "Content-Type":"application/json",
-//         },
-//         body:JSON.stringify(data),
-//     });
 }
 
 // ===To close the edit form===
@@ -231,7 +256,37 @@ const subjectCode = document.getElementById("subject-code");
 const subjectType = document.getElementById("subject-type");
 const subjectClass = document.getElementById("subject-class");
 const subjectTable = document.getElementById("subjectTableBody");
-console.log(subjectForm);
+// console.log(subjectForm);
+async function getsubjects() {
+    if(!subjectTable) return;
+    const response = await fetch("http://127.0.0.1:5000/subjects",{
+        method: "GET",
+    });
+    const subjects = await response.json()
+    console.log(subjects);
+    subjectTable.innerHTML = "";
+    for(let i=0;i<subjects.length;i++)
+    {
+        const subject = subjects[i];
+        const oldsubjects = document.createElement("tr");
+        oldsubjects.innerHTML = `
+        <td class=".subject-id">${subject.id}</td>
+        <td class=".subject-name">${subject.SUBJECT_name}</td>
+        <td class=".subject-code">${subject.SUBJECT_code}</td>
+        <td class=".subject-type">${subject.SUBJECT_type}</td>
+        <td class=".subject-class">${subject.class_name}</td>
+        <td>
+        <button class="view-btn">👁View</button>
+        <button class="edit-btn">✎Edit</button>
+        <button class="delete-btn">🗑</button>
+        </td>
+        `;
+        subjectTable.appendChild(oldsubjects);
+    }
+    
+}
+getsubjects();
+
 let subjectId = 2;
 if (subjectForm){
     subjectForm.addEventListener("submit",async function(event){
@@ -280,6 +335,7 @@ if (subjectForm){
     subjectTable.addEventListener("click", function(event) {
       console.log("Something was clicked");
       console.log("Clicked element:", event.target);
+
 
        if (event.target.classList.contains("delete-btn")) {
 
@@ -360,19 +416,33 @@ if(subjectTable){
     })
 }
 const editSubject_form = document.getElementById("edit-subject-form");
-if(subjectTable){
-    editSubject_form.addEventListener("submit",function(event){
-        event.preventDefault();
-        const newName = editSubject_name.value;
-        const newCode = editSubject_code.value;
-        const newType = editSubject_type.value;
-        const newClass = editSubject_class.value;
-
-        editingRow.querySelector(".subject-name").textContent = newName;
-        editingRow.querySelector(".subject-code").textContent = newCode;
-        editingRow.querySelector(".subject-type").textContent = newType;
-        editingRow.querySelector(".subject-class").textContent = newClass;
-
-        editSubject.style.display = "none";
-    });
-}
+// if(subjectTable){
+//     editSubject_form.addEventListener("submit",async function(event){
+//         event.preventDefault();
+//         const newName = editSubject_name.value;
+//         const newCode = editSubject_code.value;
+//         const newType = editSubject_type.value;
+//         const newClass = editSubject_class.value;
+//         const data = {
+//             "name": editSubject_name.value,
+//             "code": editSubject_code.value,
+//             "type":editSubject_type.value,
+//             "class":editSubject_class.value
+//         }
+//         console.log(data);
+//         const response = await fetch("http://127.0.0.1:5000/subjects/${subjectId}" ,{
+//         method : "PUT",
+//         headers:{
+//             "Content-Type":"application/json",
+//         },
+//         body:JSON.stringify(data),
+//         });
+//         editingRow.querySelector(".subject-name").textContent = newName;
+//         editingRow.querySelector(".subject-code").textContent = newCode;
+//         editingRow.querySelector(".subject-type").textContent = newType;
+//         editingRow.querySelector(".subject-class").textContent = newClass;
+        
+//         editSubject.style.display = "none";
+//     });
+    
+// }
