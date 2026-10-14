@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,7 +35,7 @@
             <a href="index.html" class="nav-item">🏠 Dashboard</a>
             <a href="Students.html" class="nav-item">👥 Students</a>
             <a href="subjects.html" class="nav-item">📚 Subject</a>
-            <a href="marks.html" class="nav-item">📝 Performance</a>
+            <a href="performance.html" class="nav-item">📝 Performance</a>
             <a href="settings.html" class="nav-item settings-item">⚙️ Settings</a>
         </nav>
 
@@ -80,6 +79,7 @@
 
                 <select id="select-class">
                     <option value="">All Classes</option>
+                    <option value=""></option>
                 </select>
             </div>
 
@@ -154,6 +154,14 @@
                     </div>
 
                     <div class="form-actions">
+                        
+                        <button
+                            type="button"
+                            class="cancel-marks"
+                            id="cancel-marks"
+                        >
+                            Cancel
+                        </button>
 
                         <button
                             type="submit"
@@ -161,14 +169,6 @@
                             id="save-marks"
                         >
                             Save Marks
-                        </button>
-
-                        <button
-                            type="button"
-                            class="cancel-marks"
-                            id="cancel-marks"
-                        >
-                            Cancel
                         </button>
 
                     </div>
@@ -239,8 +239,7 @@
 
     </main>
 
-    <script src="marks.js"></script>
+    <script src="performance.js"></script>
 
 </body>
 </html>
-```

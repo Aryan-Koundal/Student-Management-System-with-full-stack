@@ -983,7 +983,6 @@ body {
 }
 
 
-```css
 /* ========================================
    PERFORMANCE / MARKS PAGE
 ======================================== */
@@ -1035,7 +1034,6 @@ body {
     font-size: 20px;
     line-height: 1;
 }
-
 /* Search and Class Filter */
 .marks-controls {
     display: flex;
