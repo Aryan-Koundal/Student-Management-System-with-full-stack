@@ -58,32 +58,27 @@
             </button>
 
         </div>
-
-        <!-- Search and Class Filter -->
-        <div class="marks-controls">
-
-            <div class="marks-search">
+        <!-- Search and Filter -->
+        <section class="student-filters">
+            <div class="search-box">
+                <span>🔍</span>
                 <input
-                    type="search"
-                    id="search-marks"
-                    placeholder="Search by student name or roll number..."
+                    type="text"
+                    id="search-student"
+                    placeholder="Search students..."
                 >
-
-                <button type="button" id="search-btn">
-                    🔍 Search
-                </button>
             </div>
 
             <div class="class-filter">
-                <label for="select-class">Select Class:</label>
-
-                <select id="select-class">
+                <label for="filter-class">Class:</label>
+                <select id="filter-class">
                     <option value="">All Classes</option>
-                    <option value=""></option>
+                    <option value="BCA 1st Year">BCA 1st Year</option>
+                    <option value="BCA 2nd Year">BCA 2nd Year</option>
+                    <option value="BCA 3rd Year">BCA 3rd Year</option>
                 </select>
             </div>
-
-        </div>
+        </section>
 
         <!-- Marks Modal -->
         <div class="marks-modal" id="marks-modal">
@@ -103,7 +98,7 @@
                 </div>
 
                 <!-- Marks Form -->
-                <form class="makrs-form" id="makrs-form">
+                <form class="marks-form" id="marks-form">
 
                     <div class="form-group">
                         <label for="student-id">Student ID</label>
@@ -145,8 +140,8 @@
                     <div>
                         <button
                             type="button"
-                            class="add-subject1"
-                            id="add-subject1"
+                            class="add-subject"
+                            id="add-subject"
                         >
                             <span>+</span>
                             Add subject
@@ -154,7 +149,7 @@
                     </div>
 
                     <div class="form-actions">
-                        
+
                         <button
                             type="button"
                             class="cancel-marks"
@@ -186,12 +181,12 @@
             <div class="student-marks-card">
 
                 <!-- Student Information and Summary -->
-                <div class="student-marks-header">
+                <div class="student-marks-header" student-toggle>
 
                     <div class="student-info">
-                        <h3 class="student-name">Student Name</h3>
-                        <p class="student-rollno">Roll No: —</p>
-                        <p class="student-class">Class: —</p>
+                        <h3 class="student-name">ABC</h3>
+                        <p class="student-rollno">Roll No: — 0</p>
+                        <p class="student-class">Class: — xyz</p>
                     </div>
 
                     <div class="student-performance">
@@ -208,10 +203,18 @@
 
                     </div>
 
+                    <div>
+
+                       <button type="button" class="toggle-marks-btn" aria-label="Show subject marks">
+                           ▼
+                       </button>
+
+                    </div>
+
                 </div>
 
                 <!-- Subject-wise Marks Table -->
-                <div class="marks-table-container">
+                <div class="marks-table-container" hidden>
 
                     <table class="marks-table">
 
@@ -226,7 +229,23 @@
                         </thead>
 
                         <tbody class="marksTableBody">
-                            <!-- JavaScript will insert subject marks here -->
+                            <td class="subject-id">101</td>
+                            <td class="subject-name">abc</td>
+                            <td class="subject-code">101</td>
+                            <td class="subject-marks">999</td>
+                            <td class="student-actions">
+                                <button class="view-btn" data-action="view">
+                                👁 View
+                                </button>
+
+                                <button class="edit-btn" data-action="edit">
+                                ✎ Edit
+                                </button>
+
+                                <button class="delete-btn" data-action="delete">
+                                🗑
+                                </button>
+                            </td>
                         </tbody>
 
                     </table>

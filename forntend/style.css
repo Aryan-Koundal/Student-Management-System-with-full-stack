@@ -1034,88 +1034,6 @@ body {
     font-size: 20px;
     line-height: 1;
 }
-/* Search and Class Filter */
-.marks-controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 18px;
-    flex-wrap: wrap;
-    background: white;
-    padding: 18px;
-    border-radius: 10px;
-    margin-bottom: 25px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.marks-search {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex: 1;
-    min-width: 250px;
-}
-
-#search-marks {
-    flex: 1;
-    min-width: 0;
-    padding: 11px 13px;
-    border: 1px solid #d1d5db;
-    border-radius: 6px;
-    outline: none;
-    font-size: 14px;
-}
-
-#search-marks:focus {
-    border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-}
-
-#search-btn {
-    padding: 11px 16px;
-    background: #2563eb;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-    white-space: nowrap;
-}
-
-#search-btn:hover {
-    background: #1d4ed8;
-}
-
-.class-filter {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.class-filter label {
-    color: #374151;
-    font-size: 14px;
-    font-weight: 600;
-    white-space: nowrap;
-}
-
-#select-class {
-    min-width: 150px;
-    padding: 11px 12px;
-    border: 1px solid #d1d5db;
-    border-radius: 6px;
-    background: white;
-    color: #374151;
-    font-size: 14px;
-    outline: none;
-    cursor: pointer;
-}
-
-#select-class:focus {
-    border-color: #2563eb;
-}
-
 /* Student Marks Container */
 .marks-container {
     display: flex;
@@ -1139,9 +1057,25 @@ body {
     align-items: center;
     gap: 25px;
     flex-wrap: wrap;
-    padding-bottom: 22px;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: none;
+}
+
+.toggle-marks-btn {
+    background: none;
+    border: 1px solid #d1d5db;
+    border-radius: 5px;
+    padding: 2px 7px;
+    font-size: 16px;
+    color: #172b4d;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.toggle-marks-btn:hover {
+    background-color: #f1f5f9;
+    border-color: #94a3b8;
 }
 
 .student-info {
@@ -1196,7 +1130,9 @@ body {
 .marks-table-container {
     width: 100%;
     overflow-x: auto;
+    margin-top: 16px;
 }
+
 
 .marks-table {
     width: 100%;
