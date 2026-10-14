@@ -4,307 +4,121 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Students</title>
+    <title>Marks</title>
 </head>
 <body>
     <header class="top-header">
+        <div class="logo-section">
+            <span>🎓</span>
+            <h2>Student Management System</h2>
+        </div>
 
-     <div class="logo-section">
-         <span>🎓</span>
-         <h2>Student Management System</h2>
-     </div>
+        <div class="profile">
+            <div class="profile-icon">👤</div>
+            <span>Admin</span>
+            <span class="arrow"></span>
+        </div>
+    </header>
 
-     <div class="profile">
-         <div class="profile-icon">👤</div>
-
-         <span>Admin</span>
-
-         <span class="arrow"></span>
-     </div>
-     
-
-     </header>
-     <aside class="side-bar">
+    <aside class="side-bar">
         <nav class="navigation">
-            <a href="index.html" class="nav-item">🏠   Dashboard</a>
-            <a href="Students.html" class="nav-item">👥   Students</a>
-            <a href="subjects.html" class="nav-item">📚   Subject</a>
-            <a href="settings.html" class="nav-item settings-item">⚙️   Settings</a>
+            <a href="index.html" class="nav-item">🏠 Dashboard</a>
+            <a href="Students.html" class="nav-item">👥 Students</a>
+            <a href="subjects.html" class="nav-item">📚 Subject</a>
+            <a href="marks.html" class="nav-item">📝 Performance</a>
+            <a href="settings.html" class="nav-item settings-item">⚙️ Settings</a>
         </nav>
-     </aside>
-     <main class="main-content">
-        <!-- ===Header=== -->
-        <div class="s1"> 
-     <div> 
-        <h2>Students</h2> 
-        <p>Manage and View all Students in system</p> 
-     </div> 
+    </aside>
 
-     <button class="add-student" id="add-student"> 
-        <span>+</span>
-        Add Student 
-     </button> 
-    </div>
+    <main class="main-content">
 
-
-    <!-- Add Student Form -->
-    <div id="student-modal" class="student-modal"> 
-
-     <div class="student-modal-content"> 
-
-         <div class="modal-header"> 
-            <h2>Add New Student</h2> 
-
-            <button id="close-modal" class="close-modal"> 
-                &times; 
-            </button> 
-         </div> 
-
-         <form id="student-form"> 
-
-            <!-- <div class="form-group"> 
-                <label for="student-id">Student Id</label> 
-                <input 
-                    type="text" 
-                    id="student-id" 
-                    name="student_id" 
-                    placeholder="Enter student id"
-                    required
-                > 
-            </div>  -->
-
-
-            <div class="form-group"> 
-                <label for="student-name">Student Name</label> 
-                <input 
-                    type="text" 
-                    id="student-name" 
-                    name="student_name" 
-                    placeholder="Enter student name"
-                    required
-                > 
-            </div> 
-
-            <div class="form-group"> 
-                <label for="roll-number">Roll Number</label> 
-                <input 
-                    type="number" 
-                    id="roll-number" 
-                    name="roll_number" 
-                    placeholder="Enter roll number"
-                    required
-                > 
-            </div> 
-
-             <div class="form-group"> 
-                <label for="student-class">Class</label> 
-
-                <select id="student-class" name="student_class"> 
-                    <option value="">Select class</option> 
-                    <option value="BCA">BCA</option> 
-                    <option value="BBA">BBA</option> 
-                    <option value="MCA">MCA</option> 
-                </select> 
-             </div> 
-
-             <div class="form-group"> 
-                <label for="student-email">Email</label> 
-                <input 
-                    type="email" 
-                    id="student-email" 
-                    name="email" 
-                    placeholder="Enter email"
-                > 
-             </div> 
-
-             <div class="form-group"> 
-                <label for="student-phone">Phone</label> 
-                <input 
-                    type="tel" 
-                    id="student-phone" 
-                    name="phone" 
-                    placeholder="Enter phone number"
-                    required
-                > 
-             </div> 
-
-             <div class="modal-actions"> 
-
-                <button type="button" id="cancel-modal" class="cancel-btn">
-                    Cancel
-                </button> 
-
-                <button type="submit" id="add-modal" class="save-btn">
-                    Add Student
-                </button> 
-
-             </div> 
-
-          </form>
-  
-         </div>
-
-        </div>
-        <!-- Edit Student Form -->
-        <div id="edit-student-modal" class="student-modal">
-
-         <div class="student-modal-content">
-
-            <div class="modal-header">
-               <h2>Edit Student</h2>
-
-              <button id="close-edit-modal" class="close-modal">
-                &times;
-              </button>
+        <!-- Header -->
+        <div class="s1">
+            <div>
+                <h2>Performance</h2>
+                <p>Manage and View all Student performance in system</p>
             </div>
 
-         <form id="edit-student-form">
-
-            <div class="form-group">
-                <label for="edit-student-name">Student Name</label>
-                <input
-                    type="text"
-                    id="edit-student-name"
-                    placeholder="Enter student name"
-                    required
-                >
-            </div>
-
-            <div class="form-group">
-                <label for="edit-roll-number">Roll Number</label>
-                <input
-                    type="number"
-                    id="edit-roll-number"
-                    placeholder="Enter roll number"
-                    required
-                >
-            </div>
-
-            <div class="form-group">
-                <label for="edit-student-class">Class</label>
-
-                <select id="edit-student-class" required>
-                    <option value="">Select class</option>
-                    <option value="BCA">BCA</option>
-                    <option value="BBA">BBA</option>
-                    <option value="BCom">BCom</option>
-                    <option value="MCA">MCA</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="edit-student-email">Email</label>
-                <input
-                    type="email"
-                    id="edit-student-email"
-                    placeholder="Enter email"
-                >
-            </div>
-
-            <div class="form-group">
-                <label for="edit-student-phone">Phone</label>
-                <input
-                    type="tel"
-                    id="edit-student-phone"
-                    placeholder="Enter phone number"
-                    required
-                >
-            </div>
-
-            <div class="modal-actions">
-
-                <button
-                    type="button"
-                    id="cancel-edit-modal"
-                    class="cancel-btn">
-                    Cancel
-                </button>
-
-                <button
-                    type="submit"
-                    class="save-btn">
-                    Save Changes
-                </button>
-
-             </div>
-
-             </form> 
-           </div>
-
+            <button type="button" class="add-marks" id="add-marks">
+                <span>+</span>
+                Add student marks
+            </button>
         </div>
 
-        <!-- ===Search Tab=== -->
-       <div class="student-filters">
-         <div class="search-box">
-           <span>🔍</span>
-           <input type="text" placeholder="Search by name, roll no, or email...">
-         </div>
+        <!-- Marks Modal -->
+        <div class="marks-modal" id="marks-modal">
+            <div class="marks-modal-content">
 
-         <div class="class-filter">
-           <span>⚱️</span>
-           <select>
-            <option>All Classes</option>
-            <option>BCA</option>
-            <option>BBA</option>
-            <option>BCom</option>
-            <option>MCA</option>
-           </select>
-         </div>
-       </div>
-       <!-- ===Student Table=== -->
-       <div class="student-table">
-
-         <table id="studentsTable">
-
-           <thead>
-              <tr>
-                 <th>ID</th>
-                 <th>Name</th>
-                 <th>Roll No</th>
-                 <th>Class</th>
-                 <th>Email</th>
-                 <th>Phone</th>
-                 <th>Actions</th>
-              </tr>
-           </thead>
-
-           <tbody id="studentTableBody">
-
-              <tr class="student-row" data-student-id="1">
-
-                 <td class="student-id">1</td>
-
-                 <td class="student-name">abc</td>
-
-                 <td class="student-roll">101</td>
-
-                 <td class="student-class">BCA</td>
-
-                 <td class="student-email">abc@example.com</td>
-
-                 <td class="student-phone">##</td>
-
-                 <td class="student-actions">
-                    <button class="view-btn" data-action="view">
-                        👁 View
+                <div class="header-modal">
+                    <h2 class="modal-header">Add Marks</h2>
+                    <button type="button" class="close-modal" id="close-modal">
+                        &times;
                     </button>
+                </div>
 
-                    <button class="edit-btn" data-action="edit">
-                        ✎ Edit
-                    </button>
+                <form class="makrs-form" id="makrs-form">
 
-                    <button class="delete-btn" data-action="delete">
-                        🗑
-                    </button>
-                 </td>
+                    <div class="form-group">
+                        <label for="student-id">Student Id</label>
+                        <input
+                            type="number"
+                            id="student-id"
+                            name="student-id"
+                            placeholder="Enter student id"
+                            required
+                        >
+                    </div>
 
-              </tr>
+                    <div class="form-group">
+                        <label for="subject-id">Subject Id</label>
+                        <input
+                            type="number"
+                            id="subject-id"
+                            name="subject-id"
+                            placeholder="Enter subject id"
+                            required
+                        >
+                    </div>
 
-           </tbody>
+                    <div class="form-group">
+                        <label for="subject-marks">Marks</label>
+                        <input
+                            type="number"
+                            id="subject-marks"
+                            name="subject-marks"
+                            placeholder="Enter subject marks"
+                            min="0"
+                            required
+                        >
+                    </div>
 
-         </table>
+                    <div>
+                        <button type="button" class="add-subject1" id="add-subject1">
+                            <span>+</span>
+                            Add subject
+                        </button>
+                    </div>
 
-</div>
-<script src="script.js"></script>
+                    <div class="form-actions">
+                        <button type="submit" class="save-marks" id="save-marks">
+                            Save Marks
+                        </button>
+
+                        <button type="button" class="cancel-marks" id="cancel-marks">
+                            Cancel
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+        <!-- Student marks cards will appear here -->
+        <div class="marks-container" id="marks-container">
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
 </body>
 </html>

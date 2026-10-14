@@ -28,7 +28,7 @@ if (addStudent) {
 
 // ===Add student details===
 const studentForm = document.getElementById("student-form");
-// const studentId = document.getElementById("student-id");
+const studentId = document.getElementById("student-id");
 const studentName = document.getElementById("student-name");
 const studentRollno = document.getElementById("roll-number");
 const studentClass = document.getElementById("student-class");
@@ -64,7 +64,7 @@ async function getStudents() {
     });
 }
 getStudents();
-let studentId = 2;
+// let studentId = 2;
 if (studentForm){
     studentForm.addEventListener("submit",async function(event){
         event.preventDefault();
@@ -107,7 +107,7 @@ if (studentForm){
         </td>
         `;
         studentTableBody.appendChild(newStudent);
-        studentId ++;
+        // studentId ++;
     })
     // ===Remove or delete an Student===
     studentTableBody.addEventListener("click", async function(event) {
@@ -182,10 +182,12 @@ const editStudentClass = document.getElementById("edit-student-class");
 const editStudentEmail = document.getElementById("edit-student-email");
 const editStudentPhone = document.getElementById("edit-student-phone");
 let editingRow = null;
+let student_Id;
 if(studentTableBody){
 studentTableBody.addEventListener("click",function(event){
     if(event.target.classList.contains("edit-btn")){
         const row = event.target.closest("tr");
+        student_Id = row.cells[0].textContent;
         editingRow = row;
         const name = row.querySelector(".student-name").textContent;
         const roll = row.querySelector(".student-roll").textContent;
@@ -202,12 +204,10 @@ studentTableBody.addEventListener("click",function(event){
         editStudent.style.display = "flex";
     }
 })
-}
 
 // ===save changes===
 const editStudentForm = document.getElementById("edit-student-form");
-if(studentTableBody){
-editStudentForm.addEventListener("submit", function(event) {
+editStudentForm.addEventListener("submit", async function(event) {
 
     event.preventDefault();
 
@@ -216,6 +216,21 @@ editStudentForm.addEventListener("submit", function(event) {
     const newClass = editStudentClass.value;
     const newEmail = editStudentEmail.value;
     const newPhone = editStudentPhone.value;
+
+    const data = {
+        "name":editStudentName.value,
+        "rollno":editRollNumber.value,
+        "class":editStudentClass.value,
+        "email":editStudentEmail.value,
+        "phone":editStudentPhone.value
+    };
+    const response = await fetch(`http://127.0.0.1:5000/students/${student_Id}`,{
+        method:"PUT",
+        headers:{
+            "Content-Type":"application/json",
+        },
+        body:JSON.stringify(data),
+    });
 
     editingRow.querySelector(".student-name").textContent = newName;
     editingRow.querySelector(".student-roll").textContent = newRoll;
@@ -270,11 +285,11 @@ async function getsubjects() {
         const subject = subjects[i];
         const oldsubjects = document.createElement("tr");
         oldsubjects.innerHTML = `
-        <td class=".subject-id">${subject.id}</td>
-        <td class=".subject-name">${subject.SUBJECT_name}</td>
-        <td class=".subject-code">${subject.SUBJECT_code}</td>
-        <td class=".subject-type">${subject.SUBJECT_type}</td>
-        <td class=".subject-class">${subject.class_name}</td>
+        <td class="subject-id">${subject.id}</td>
+        <td class="subject-name">${subject.SUBJECT_name}</td>
+        <td class="subject-code">${subject.SUBJECT_code}</td>
+        <td class="subject-type">${subject.SUBJECT_type}</td>
+        <td class="subject-class">${subject.class_name}</td>
         <td>
         <button class="view-btn">👁View</button>
         <button class="edit-btn">✎Edit</button>
@@ -287,7 +302,7 @@ async function getsubjects() {
 }
 getsubjects();
 
-let subjectId = 2;
+// let subjectId = 2;
 if (subjectForm){
     subjectForm.addEventListener("submit",async function(event){
         event.preventDefault();
@@ -329,20 +344,30 @@ if (subjectForm){
         </td>
         `;
         subjectTable.appendChild(newSubject);
-        subjectId++;
+        // subjectId++;
     })
     // ===Remove or delete an Subject===
-    subjectTable.addEventListener("click", function(event) {
+    subjectTable.addEventListener("click",async function(event) {
       console.log("Something was clicked");
       console.log("Clicked element:", event.target);
 
 
        if (event.target.classList.contains("delete-btn")) {
 
-          const row = event.target.closest("tr");
 
+          const row = event.target.closest("tr");
+          const subjectId = row.cells[0].textContent;
+
+          const response = await fetch("http://127.0.0.1:5000/subjects",{
+            method:"DELETE",
+            headers:{
+                "Content-Type":"application/json",
+            },
+            body:JSON.stringify({id:Number(subjectId)})
+          });
+          if (response.ok){
           row.remove();
-        }
+        }}
         });
 
     // ===View the subject details===
@@ -391,11 +416,14 @@ const editSubject_name = document.getElementById("edit-subject-name");
 const editSubject_code = document.getElementById("edit-subject-code");
 const editSubject_type = document.getElementById("edit-subject-type");
 const editSubject_class = document.getElementById("edit-subject-class");
+let subject_Id;
 if(subjectTable){
     subjectTable.addEventListener("click",function(event){
         if(event.target.classList.contains("edit-btn")){
             const row = event.target.closest("tr");
+            subject_Id = row.cells[0].textContent;
             editingRow = row;
+            console.log(row.innerHTML);
             const subjectName = row.querySelector(".subject-name").textContent;
             const subjectCode = row.querySelector(".subject-code").textContent;
             const subjectType = row.querySelector(".subject-type").textContent;
@@ -414,35 +442,37 @@ if(subjectTable){
             editSubject.style.display = "flex";
         }
     })
-}
 const editSubject_form = document.getElementById("edit-subject-form");
-// if(subjectTable){
-//     editSubject_form.addEventListener("submit",async function(event){
-//         event.preventDefault();
-//         const newName = editSubject_name.value;
-//         const newCode = editSubject_code.value;
-//         const newType = editSubject_type.value;
-//         const newClass = editSubject_class.value;
-//         const data = {
-//             "name": editSubject_name.value,
-//             "code": editSubject_code.value,
-//             "type":editSubject_type.value,
-//             "class":editSubject_class.value
-//         }
-//         console.log(data);
-//         const response = await fetch("http://127.0.0.1:5000/subjects/${subjectId}" ,{
-//         method : "PUT",
-//         headers:{
-//             "Content-Type":"application/json",
-//         },
-//         body:JSON.stringify(data),
-//         });
-//         editingRow.querySelector(".subject-name").textContent = newName;
-//         editingRow.querySelector(".subject-code").textContent = newCode;
-//         editingRow.querySelector(".subject-type").textContent = newType;
-//         editingRow.querySelector(".subject-class").textContent = newClass;
+    editSubject_form.addEventListener("submit",async function(event){
+        event.preventDefault();
+        const newName = editSubject_name.value;
+        const newCode = editSubject_code.value;
+        const newType = editSubject_type.value;
+        const newClass = editSubject_class.value;
+        const data = {
+            "name": editSubject_name.value,
+            "code": editSubject_code.value,
+            "type":editSubject_type.value,
+            "class":editSubject_class.value
+        }
+        console.log(data);
+        const response = await fetch(`http://127.0.0.1:5000/subjects/${subject_Id}` ,{
+        method : "PUT",
+        headers:{
+            "Content-Type":"application/json",
+        },
+        body:JSON.stringify(data),
+        });
+        if (!response.ok) {
+    console.log("Failed to update subject:", response.status);
+    return;
+    }
+        editingRow.querySelector(".subject-name").textContent = newName;
+        editingRow.querySelector(".subject-code").textContent = newCode;
+        editingRow.querySelector(".subject-type").textContent = newType;
+        editingRow.querySelector(".subject-class").textContent = newClass;
         
-//         editSubject.style.display = "none";
-//     });
+        editSubject.style.display = "none";
+    });
     
-// }
+}

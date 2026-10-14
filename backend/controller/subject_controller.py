@@ -41,18 +41,46 @@ def old_subjects_controller():
     return jsonify(old_subjects),200
 
 
-def edit_subject_controller():
+def edit_subject_controller(subject_Id):
     data = request.json
+
+    subject = db.session.get(Subject,subject_Id)
+
+    if subject is None:
+        return jsonify({
+            "message":"Subject not found"
+        }),404
 
     name = data["name"]
     code = data["code"]
     type = data["type"]
     new_class = data["class"]
 
-    sub = Subject(
-        SUBJECT_name = name,
-        SUBJECT_code = code,
-        SUBJECT_type = type,
-        class_name = new_class
-    )
-    db.session.add(sub)
+    subject.SUBJECT_name = name
+    subject.SUBJECT_code = code
+    subject.SUBJECT_type = type
+    subject.class_name = new_class
+
+    db.session.commit()
+
+    return jsonify({
+        "message":"Subject updated successfuly!"
+    }),200
+
+
+def delete_subject_controller():
+    data = request.json
+
+    subject_id = data["id"]
+
+    subject = db.session.get(Subject, subject_id)
+
+    if subject is None :
+        return jsonify({"error": "Subject not found"}), 404
+
+    db.session.delete(subject)
+    db.session.commit()
+
+    return jsonify({
+            "message": "Subject deleted successfully"
+            }), 200

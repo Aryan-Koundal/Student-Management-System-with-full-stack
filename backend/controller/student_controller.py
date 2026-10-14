@@ -56,3 +56,29 @@ def delete_student_controller(student_id):
     return jsonify({
         "message": "Student deleted successfully"
         }), 200
+
+def edit_student_controller(student_id):
+
+    data = request.json
+    student = db.session.get(Student,student_id)
+
+    if student is None:
+        return jsonify({
+            "message": "Student not found"
+        }),404
+
+    name = data["name"]
+    rollno = data["rollno"]
+    student_class = data["class"]
+    email = data["email"]
+    phone = data["phone"]
+
+    student.name = name
+    student.rollno = rollno
+    student.class_name = student_class
+    student.email = email
+    student.phone = phone 
+
+    db.session.commit()
+
+    return jsonify({"message": "Student updated successfully!"}), 200

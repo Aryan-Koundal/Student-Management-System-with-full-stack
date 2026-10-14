@@ -1,6 +1,6 @@
 # from flask import Blueprint
 from models.students import Student
-from controller.student_controller import student_controller,old_students_controller,delete_student_controller
+from controller.student_controller import student_controller,old_students_controller,delete_student_controller,edit_student_controller
 from .routes_1 import blueprint
 from flask import jsonify
 
@@ -51,3 +51,7 @@ def old_student():
 @blueprint.route("/students/<int:student_id>",methods=["DELETE"])
 def delete_student(student_id):
     return delete_student_controller(student_id)
+
+@blueprint.route("/students/<int:student_id>",methods=["PUT"])
+def edit_student(student_id):
+    return edit_student_controller(student_id)

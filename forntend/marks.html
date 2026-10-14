@@ -1,0 +1,246 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style.css">
+
+    <title>Marks Management</title>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="top-header">
+
+        <div class="logo-section">
+            <span>🎓</span>
+            <h2>Student Management System</h2>
+        </div>
+
+        <div class="profile">
+            <div class="profile-icon">👤</div>
+            <span>Admin</span>
+            <span class="arrow"></span>
+        </div>
+
+    </header>
+
+    <!-- Sidebar -->
+    <aside class="side-bar">
+
+        <nav class="navigation">
+            <a href="index.html" class="nav-item">🏠 Dashboard</a>
+            <a href="Students.html" class="nav-item">👥 Students</a>
+            <a href="subjects.html" class="nav-item">📚 Subject</a>
+            <a href="marks.html" class="nav-item">📝 Performance</a>
+            <a href="settings.html" class="nav-item settings-item">⚙️ Settings</a>
+        </nav>
+
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Page Header -->
+        <div class="s1">
+
+            <div>
+                <h2>Performance</h2>
+                <p>Manage and view all student performance in the system.</p>
+            </div>
+
+            <button type="button" class="add-marks" id="add-marks">
+                <span>+</span>
+                Add student marks
+            </button>
+
+        </div>
+
+        <!-- Search and Class Filter -->
+        <div class="marks-controls">
+
+            <div class="marks-search">
+                <input
+                    type="search"
+                    id="search-marks"
+                    placeholder="Search by student name or roll number..."
+                >
+
+                <button type="button" id="search-btn">
+                    🔍 Search
+                </button>
+            </div>
+
+            <div class="class-filter">
+                <label for="select-class">Select Class:</label>
+
+                <select id="select-class">
+                    <option value="">All Classes</option>
+                </select>
+            </div>
+
+        </div>
+
+        <!-- Marks Modal -->
+        <div class="marks-modal" id="marks-modal">
+
+            <div class="marks-modal-content">
+
+                <div class="header-modal">
+                    <h2 class="modal-header">Add Marks</h2>
+
+                    <button
+                        type="button"
+                        class="close-modal"
+                        id="close-modal"
+                    >
+                        &times;
+                    </button>
+                </div>
+
+                <!-- Marks Form -->
+                <form class="makrs-form" id="makrs-form">
+
+                    <div class="form-group">
+                        <label for="student-id">Student ID</label>
+
+                        <input
+                            type="number"
+                            id="student-id"
+                            name="student-id"
+                            placeholder="Enter student ID"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject-id">Subject ID</label>
+
+                        <input
+                            type="number"
+                            id="subject-id"
+                            name="subject-id"
+                            placeholder="Enter subject ID"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject-marks">Marks</label>
+
+                        <input
+                            type="number"
+                            id="subject-marks"
+                            name="subject-marks"
+                            placeholder="Enter marks obtained"
+                            min="0"
+                            required
+                        >
+                    </div>
+
+                    <div>
+                        <button
+                            type="button"
+                            class="add-subject1"
+                            id="add-subject1"
+                        >
+                            <span>+</span>
+                            Add subject
+                        </button>
+                    </div>
+
+                    <div class="form-actions">
+
+                        <button
+                            type="submit"
+                            class="save-marks"
+                            id="save-marks"
+                        >
+                            Save Marks
+                        </button>
+
+                        <button
+                            type="button"
+                            class="cancel-marks"
+                            id="cancel-marks"
+                        >
+                            Cancel
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <!-- Student Marks Cards -->
+        <div class="marks-container" id="marks-container">
+
+            <!-- Example Student Card -->
+            <div class="student-marks-card">
+
+                <!-- Student Information and Summary -->
+                <div class="student-marks-header">
+
+                    <div class="student-info">
+                        <h3 class="student-name">Student Name</h3>
+                        <p class="student-rollno">Roll No: —</p>
+                        <p class="student-class">Class: —</p>
+                    </div>
+
+                    <div class="student-performance">
+
+                        <div class="total-marks">
+                            <span>Total Marks</span>
+                            <h3 class="total-marks-value">0</h3>
+                        </div>
+
+                        <div class="percentage">
+                            <span>Percentage</span>
+                            <h3 class="percentage-value">0%</h3>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Subject-wise Marks Table -->
+                <div class="marks-table-container">
+
+                    <table class="marks-table">
+
+                        <thead>
+                            <tr>
+                                <th>Subject ID</th>
+                                <th>Subject Name</th>
+                                <th>Subject Code</th>
+                                <th>Marks</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody class="marksTableBody">
+                            <!-- JavaScript will insert subject marks here -->
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <script src="marks.js"></script>
+
+</body>
+</html>
+```
