@@ -1,5 +1,5 @@
 from .routes_1 import blueprint
-from controller.marks_controller import add_marks_controller,get_student_info_controller,get_subject_info_controller
+from controller.marks_controller import add_marks_controller,get_student_info_controller,get_marks_controller
 from models.marks import Marks
 from flask import jsonify
 
@@ -9,10 +9,4 @@ def add_marks():
 
 @blueprint.route("/performance",methods=["GET"])
 def getstudents():
-    students = get_student_info_controller()
-    subjects = get_subject_info_controller()
-
-    return jsonify({
-        "students": students,
-        "subjects": subjects
-    })
+    return get_marks_controller()

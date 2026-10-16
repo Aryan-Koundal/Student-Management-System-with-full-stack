@@ -72,7 +72,7 @@ if (marks_container) {
         button.textContent = marksTable.hidden ? "▼" : "▲";
     });
 }
-
+// ===adding the marks===
 const marks_modal = document.getElementById("marks-modal");
 const student_id = document.getElementById("student-id");
 if(marks_form)
@@ -104,24 +104,24 @@ if(marks_form)
         });
 
        console.log(response);
-       const tableBody = student.querySelector(".marksTableBody");
+       const tableBody = document.querySelector(".marksTableBody");
 
-       data.subjects.forEach(function(subject) {
-       const row = document.createElement("tr");
+    //    data.subjects.forEach(function(subject) {
+    //    const row = document.createElement("tr");
 
-       row.innerHTML = `
-        <td class="subject-id">${subject.subject_id}</td>
-        <td class="subject-name">-</td>
-        <td class="subject-code">-</td>
-        <td class="subject-marks">${subject.marks}</td>
-        <td class="student-actions">
-            <button type="button" class="edit-btn">✎ Edit</button>
-            <button type="button" class="delete-btn">🗑</button>
-        </td>
-        `;
+    //    row.innerHTML = `
+    //     <td class="subject-id">${subject.subject_id}</td>
+    //     <td class="subject-name">-</td>
+    //     <td class="subject-code">-</td>
+    //     <td class="subject-marks">${subject.marks}</td>
+    //     <td class="student-actions">
+    //         <button type="button" class="edit-btn">✎ Edit</button>
+    //         <button type="button" class="delete-btn">🗑</button>
+    //     </td>
+    //     `;
 
-        tableBody.appendChild(row);
-     });
+    //     tableBody.appendChild(row);
+    //  });
         
     });
 }
@@ -202,7 +202,7 @@ if(marks_container)
 
 
 
-// ===Add marks to student===
+// ===getting existing students===
 
 // const marks_form = document.getElementById("marks-form");
 // const marks_modal = document.getElementById("marks-modal");
@@ -221,7 +221,7 @@ async function getStudents(){
     console.log(data);
     marks_container.innerHTML="";
     marks_table.innerHTML="";
-    data.students.forEach(function(student_detail){
+    data.forEach(function(student_detail){
     const student = document.createElement("div");
     student.className="student-marks-card";
     student.innerHTML=`
@@ -281,13 +281,13 @@ async function getStudents(){
         marks_container.appendChild(student);
 
         const subject_table_body = student.querySelector(".marksTableBody");
-        data.subjects.forEach(function(subject_details){
-            const subject = document.createElement("tr");
-            subject.innerHTML=`
-                            <td class="subject-id">${subject_details.subject_id}</td>
-                            <td class="subject-name">${subject_details.subject_name}</td>
-                            <td class="subject-code">${subject_details.subject_code}</td>
-                            <td class="subject-marks"></td>
+        student_detail.subjects.forEach(function(subject){
+            const subjects = document.createElement("tr");
+            subjects.innerHTML=`
+                            <td class="subject-id">${subject.subject_id}</td>
+                            <td class="subject-name">${subject.subject_name}</td>
+                            <td class="subject-code">${subject.subject_code}</td>
+                            <td class="subject-marks">${subject.subject_marks}</td>
                             <td class="student-actions">
                             
                                 <button class="edit-btn" data-action="edit">
@@ -299,7 +299,7 @@ async function getStudents(){
                                 </button>
                             </td>
         `;
-        subject_table_body.appendChild(subject);
+        subject_table_body.appendChild(subjects);
         });
         });
 }
