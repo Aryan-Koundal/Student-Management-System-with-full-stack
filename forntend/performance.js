@@ -75,11 +75,11 @@ if (marks_container) {
 
 const marks_modal = document.getElementById("marks-modal");
 const student_id = document.getElementById("student-id");
-const subjects =[];
 if(marks_form)
 {
-    marks_form.addEventListener("submit",function(event){
+    marks_form.addEventListener("submit",async function(event){
         event.preventDefault();
+        const subjects =[];
         const subject_ids = document.querySelectorAll('input[name="subject-id"]');
         const subject_marks = document.querySelectorAll('input[name="subject-marks"]');
         // const save = document.getElementById("save-marks");
@@ -95,16 +95,143 @@ if(marks_form)
         };
         console.log(data);
 
-        const student = document.createElement("div");
-        student.className="student-marks-card";
-        student.innerHTML=`
+        const response = await fetch("http://127.0.0.1:5000/performance",{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json",
+            },
+            body:JSON.stringify(data),
+        });
+
+       console.log(response);
+       const tableBody = student.querySelector(".marksTableBody");
+
+       data.subjects.forEach(function(subject) {
+       const row = document.createElement("tr");
+
+       row.innerHTML = `
+        <td class="subject-id">${subject.subject_id}</td>
+        <td class="subject-name">-</td>
+        <td class="subject-code">-</td>
+        <td class="subject-marks">${subject.marks}</td>
+        <td class="student-actions">
+            <button type="button" class="edit-btn">✎ Edit</button>
+            <button type="button" class="delete-btn">🗑</button>
+        </td>
+        `;
+
+        tableBody.appendChild(row);
+     });
+        
+    });
+}
+
+// ===edit subject marks form===
+const open_form = document.getElementById("edit-marks-modal");
+const edit_button = document.querySelector(".edit-btn");
+const edit_subject_id = document.getElementById("edit-subject-id");
+const edit_subject_marks = document.getElementById("edit-subject-marks");
+let editingRow = null;
+// console.log(edit_button);
+if(edit_button)
+{
+    edit_button.addEventListener("click",function(event){
+        // console.log("Edit button clicked");
+        if(event.target.classList.contains("edit-btn"))
+        {
+            const row = event.target.closest("tr");
+            editingRow = row;
+            const subject_id = row.querySelector(".subject-id").textContent;
+            const subject_marks = row.querySelector(".subject-marks").textContent;
+
+            edit_subject_id.value = subject_id;
+            edit_subject_marks.value = subject_marks;
+
+        }
+        open_form.style.display="flex";
+    });
+
+}
+// ===save edit===
+const edit_form = document.querySelector("#edit-marks-form");
+const save_button = document.querySelector(".save-btn");
+if (edit_form)
+{
+    edit_form.addEventListener("submit",function(event){
+        event.preventDefault();
+
+        const new_id = edit_subject_id.value;
+        const new_marks = edit_subject_marks.value;
+
+        editingRow.querySelector(".subject-id").textContent = new_id;
+        editingRow.querySelector(".subject-marks").textContent = new_marks;
+
+        open_form.style.display="none";
+    });
+}
+
+// close,cancel edit modal
+if(open_form)
+{
+    const close_edit_modal = document.querySelector(".close-edit-modal");
+    close_edit_modal.addEventListener("click",function(){
+        open_form.style.display="none";
+    });
+
+    const cancel_edit_modal = document.querySelector(".cancel-edit-btn");
+    cancel_edit_modal.addEventListener("click",function(){
+        open_form.style.display="none";
+    });
+}
+
+// ===delete subject details===
+
+// const subject_table = document.querySelector(".marksTableBody");
+// const subject_table = document.getElementById("marksTableBody")
+// const marks_container = document.querySelector(".marks-container");
+const delete_button = document.querySelectorAll(".delete-btn");
+if(marks_container)
+{
+    marks_container.addEventListener("click",function(event){
+        if(event.target.classList.contains("delete-btn")){
+            const row = event.target.closest("tr");
+            row.remove();
+        }
+    });
+}
+
+
+
+// ===Add marks to student===
+
+// const marks_form = document.getElementById("marks-form");
+// const marks_modal = document.getElementById("marks-modal");
+// const student_id = document.getElementById("student-id");
+const subject_id = document.getElementById("subject-id");
+const subject_marks = document.getElementById("subject-marks");
+// const marks_container = document.getElementById("marks-container");
+
+
+async function getStudents(){
+    if(!marks_container) return;
+    const response = await fetch("http://127.0.0.1:5000/performance",{
+        method : "GET",
+    });
+    const data = await response.json();
+    console.log(data);
+    marks_container.innerHTML="";
+    marks_table.innerHTML="";
+    data.students.forEach(function(student_detail){
+    const student = document.createElement("div");
+    student.className="student-marks-card";
+    student.innerHTML=`
 
                 <div class="student-marks-header" student-toggle>
 
                     <div class="student-info">
-                        <h3 class="student-name">${student.name}</h3>
-                        <p class="student-rollno">${student.rollno}</p>
-                        <p class="student-class">${student.class}</p>
+                        <h3 class="student-name">${student_detail.student_name}</h3>
+                        <p class="student-rollno">${student_detail.student_rollno}</p>
+                        <p class="student-class">${student_detail.student_class}</p>
                     </div>
 
                     <div class="student-performance">
@@ -145,16 +272,24 @@ if(marks_form)
                             </tr>
                         </thead>
 
-                        <tbody class="marksTableBody">
-                            <td class="subject-id"></td>
-                            <td class="subject-name"></td>
-                            <td class="subject-code"></td>
+                        <tbody class="marksTableBody"></tbody>
+
+                    </table>
+
+                </div>
+            `;
+        marks_container.appendChild(student);
+
+        const subject_table_body = student.querySelector(".marksTableBody");
+        data.subjects.forEach(function(subject_details){
+            const subject = document.createElement("tr");
+            subject.innerHTML=`
+                            <td class="subject-id">${subject_details.subject_id}</td>
+                            <td class="subject-name">${subject_details.subject_name}</td>
+                            <td class="subject-code">${subject_details.subject_code}</td>
                             <td class="subject-marks"></td>
                             <td class="student-actions">
-                                <button class="view-btn" data-action="view">
-                                👁 View
-                                </button>
-
+                            
                                 <button class="edit-btn" data-action="edit">
                                 ✎ Edit
                                 </button>
@@ -163,102 +298,9 @@ if(marks_form)
                                 🗑
                                 </button>
                             </td>
-                        </tbody>
-
-                    </table>
-
-                </div>
-            `;
-            marks_container.appendChild(student);
-        
-    });
+        `;
+        subject_table_body.appendChild(subject);
+        });
+        });
 }
-
-// ===Add marks to student===
-
-// const marks_form = document.getElementById("marks-form");
-// const marks_modal = document.getElementById("marks-modal");
-// const student_id = document.getElementById("student-id");
-const subject_id = document.getElementById("subject-id");
-const subject_marks = document.getElementById("subject-marks");
-// const marks_container = document.getElementById("marks-container");
-
-// function getStudents(){
-//     if(!marks_container) return;
-//     const student = document.createElement("div");
-//     student.className="student-marks-card";
-//     student.innerHTML=`
-
-//                 <div class="student-marks-header" student-toggle>
-
-//                     <div class="student-info">
-//                         <h3 class="student-name">${student.name}</h3>
-//                         <p class="student-rollno">${student.rollno}</p>
-//                         <p class="student-class">${student.class}</p>
-//                     </div>
-
-//                     <div class="student-performance">
-
-//                         <div class="total-marks">
-//                             <span>Total Marks</span>
-//                             <h3 class="total-marks-value">0</h3>
-//                         </div>
-
-//                         <div class="percentage">
-//                             <span>Percentage</span>
-//                             <h3 class="percentage-value">0%</h3>
-//                         </div>
-
-//                     </div>
-
-//                     <div>
-
-//                        <button type="button" class="toggle-marks-btn" aria-label="Show subject marks">
-//                            ▼
-//                        </button>
-
-//                     </div>
-
-//                 </div>
-
-//                 <div class="marks-table-container" hidden>
-
-//                     <table class="marks-table">
-
-//                         <thead>
-//                             <tr>
-//                                 <th>Subject ID</th>
-//                                 <th>Subject Name</th>
-//                                 <th>Subject Code</th>
-//                                 <th>Marks</th>
-//                                 <th>Actions</th>
-//                             </tr>
-//                         </thead>
-
-//                         <tbody class="marksTableBody">
-//                             <td class="subject-id"></td>
-//                             <td class="subject-name"></td>
-//                             <td class="subject-code"></td>
-//                             <td class="subject-marks"></td>
-//                             <td class="student-actions">
-//                                 <button class="view-btn" data-action="view">
-//                                 👁 View
-//                                 </button>
-
-//                                 <button class="edit-btn" data-action="edit">
-//                                 ✎ Edit
-//                                 </button>
-
-//                                 <button class="delete-btn" data-action="delete">
-//                                 🗑
-//                                 </button>
-//                             </td>
-//                         </tbody>
-
-//                     </table>
-
-//                 </div>
-//             `;
-//             marks_container.appendChild(student);
-// }
-// getStudents();
+getStudents();

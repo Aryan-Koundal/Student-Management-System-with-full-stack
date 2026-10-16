@@ -228,16 +228,13 @@
                             </tr>
                         </thead>
 
-                        <tbody class="marksTableBody">
+                        <tbody class="marksTableBody" id="marksTableBody">
                             <td class="subject-id">101</td>
                             <td class="subject-name">abc</td>
                             <td class="subject-code">101</td>
                             <td class="subject-marks">999</td>
                             <td class="student-actions">
-                                <button class="view-btn" data-action="view">
-                                👁 View
-                                </button>
-
+                            
                                 <button class="edit-btn" data-action="edit">
                                 ✎ Edit
                                 </button>
@@ -255,6 +252,57 @@
             </div>
 
         </div>
+
+        <!-- Edit performance of subject Form -->
+    <div id="edit-marks-modal" class="edit-marks-modal">
+        <div class="marks-modal-content">
+
+            <div class="modal-header">
+                <h2>Edit Performance</h2>
+
+                <button id="close-edit-modal" class="close-edit-modal">
+                    &times;
+                </button>
+            </div>
+
+            <form id="edit-marks-form">
+
+                <div class="form-group">
+                    <label for="edit-subject-id">Subject Id</label>
+                    <input
+                        type="text"
+                        id="edit-subject-id"
+                        placeholder="Enter student id"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-subject-marks">Subject Marks</label>
+                    <input
+                        type="number"
+                        id="edit-subject-marks"
+                        placeholder="Enter roll number"
+                        required
+                    >
+                </div>
+
+                <div class="modal-actions">
+                    <button
+                        type="button"
+                        id="cancel-edit-modal"
+                        class="cancel-edit-btn">
+                        Cancel
+                    </button>
+
+                    <button type="submit" class="save-btn">
+                        Save Changes
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
 
     </main>
 

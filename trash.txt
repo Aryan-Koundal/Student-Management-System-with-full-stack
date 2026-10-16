@@ -1,0 +1,16 @@
+
+
+
+
+
+
+if(edit_button)
+{
+    const open_form = document.getElementById("edit-marks-modal");
+    edit_button.addEventListener("click",function(event){
+        if(event.target.classList.contains("edit-btn")){
+            const row = event.target.closest("tr");
+        }
+        open_form.style.display="flex";
+    });
+}
