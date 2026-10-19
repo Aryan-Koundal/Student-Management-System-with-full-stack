@@ -86,6 +86,7 @@ def get_marks_controller():
 
     for i in data:
         marks.append({
+           "marks_id": i.id,
             "student_id":i.student_id,
             "subject_id":i.subject_id,
             "student_marks": i.marks
@@ -137,6 +138,7 @@ def get_marks_controller():
                 for subject in subject_list:
                  if(mark["subject_id"]==subject["subject_id"]):
                   existing_student["subjects"].append({
+                    "marks_id":mark["marks_id"],
                     "subject_id":subject["subject_id"],
                     "subject_name":subject["subject_name"],
                     "subject_code":subject["subject_code"],
@@ -147,3 +149,17 @@ def get_marks_controller():
     
 
     return jsonify(student_info)
+
+def delete_marks_id_controller(marks_id):
+   id = db.session.get(Marks,marks_id)
+
+   if id is None:
+      return jsonify({
+         "error":"not found"
+      }),404
+
+   db.session.delete(id)
+   db.session.commit()
+   return jsonify({
+      "message":"deleted successfully"
+   }),200

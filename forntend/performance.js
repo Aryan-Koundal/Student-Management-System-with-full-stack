@@ -283,6 +283,7 @@ async function getStudents(){
         const subject_table_body = student.querySelector(".marksTableBody");
         student_detail.subjects.forEach(function(subject){
             const subjects = document.createElement("tr");
+            subjects.dataset.marksId = subject.marks_id;
             subjects.innerHTML=`
                             <td class="subject-id">${subject.subject_id}</td>
                             <td class="subject-name">${subject.subject_name}</td>
@@ -301,6 +302,20 @@ async function getStudents(){
         `;
         subject_table_body.appendChild(subjects);
         });
+        subject_table_body.addEventListener("click",async function(event){
+           if(event.target.classList.contains("delete-btn"))
+           {
+            const row = event.target.closest("tr");
+            const marks_id = row.dataset.marksId;
+            if (confirm("Are you sure you want to delete these marks?"))
+            {
+                const response = await fetch(`http://127.0.0.1:5000/performance/${marks_id}`,{
+                    method:"DELETE",
+
+            })
+            }
+            row.remove();
+        }});
         });
 }
 getStudents();
