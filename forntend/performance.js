@@ -126,79 +126,21 @@ if(marks_form)
     });
 }
 
-// ===edit subject marks form===
-const open_form = document.getElementById("edit-marks-modal");
-const edit_button = document.querySelector(".edit-btn");
-const edit_subject_id = document.getElementById("edit-subject-id");
-const edit_subject_marks = document.getElementById("edit-subject-marks");
-let editingRow = null;
-// console.log(edit_button);
-if(edit_button)
-{
-    edit_button.addEventListener("click",function(event){
-        // console.log("Edit button clicked");
-        if(event.target.classList.contains("edit-btn"))
-        {
-            const row = event.target.closest("tr");
-            editingRow = row;
-            const subject_id = row.querySelector(".subject-id").textContent;
-            const subject_marks = row.querySelector(".subject-marks").textContent;
-
-            edit_subject_id.value = subject_id;
-            edit_subject_marks.value = subject_marks;
-
-        }
-        open_form.style.display="flex";
-    });
-
-}
-// ===save edit===
-const edit_form = document.querySelector("#edit-marks-form");
-const save_button = document.querySelector(".save-btn");
-if (edit_form)
-{
-    edit_form.addEventListener("submit",function(event){
-        event.preventDefault();
-
-        const new_id = edit_subject_id.value;
-        const new_marks = edit_subject_marks.value;
-
-        editingRow.querySelector(".subject-id").textContent = new_id;
-        editingRow.querySelector(".subject-marks").textContent = new_marks;
-
-        open_form.style.display="none";
-    });
-}
-
-// close,cancel edit modal
-if(open_form)
-{
-    const close_edit_modal = document.querySelector(".close-edit-modal");
-    close_edit_modal.addEventListener("click",function(){
-        open_form.style.display="none";
-    });
-
-    const cancel_edit_modal = document.querySelector(".cancel-edit-btn");
-    cancel_edit_modal.addEventListener("click",function(){
-        open_form.style.display="none";
-    });
-}
-
 // ===delete subject details===
 
 // const subject_table = document.querySelector(".marksTableBody");
 // const subject_table = document.getElementById("marksTableBody")
 // const marks_container = document.querySelector(".marks-container");
-const delete_button = document.querySelectorAll(".delete-btn");
-if(marks_container)
-{
-    marks_container.addEventListener("click",function(event){
-        if(event.target.classList.contains("delete-btn")){
-            const row = event.target.closest("tr");
-            row.remove();
-        }
-    });
-}
+// const delete_button = document.querySelectorAll(".delete-btn");
+// if(marks_container)
+// {
+//     marks_container.addEventListener("click",function(event){
+//         if(event.target.classList.contains("delete-btn")){
+//             const row = event.target.closest("tr");
+//             row.remove();
+//         }
+//     });
+// }
 
 
 
@@ -302,6 +244,22 @@ async function getStudents(){
         `;
         subject_table_body.appendChild(subjects);
         });
+
+
+        // ===calculating total marks and percentage===
+        let totalMarks = 0;
+
+       student_detail.subjects.forEach(function(subject) {
+       totalMarks += Number(subject.subject_marks);
+       });
+
+      const maximumMarks = student_detail.subjects.length * 100;
+      const percentage = maximumMarks > 0 ? (totalMarks / maximumMarks) * 100 : 0;
+      student.querySelector(".total-marks-value").textContent = `${totalMarks} / ${maximumMarks}`;
+      student.querySelector(".percentage-value").textContent = `${percentage.toFixed(2)}%`;
+
+
+        // ===delete student subject marks===
         subject_table_body.addEventListener("click",async function(event){
            if(event.target.classList.contains("delete-btn"))
            {
@@ -319,3 +277,74 @@ async function getStudents(){
         });
 }
 getStudents();
+
+// ===edit subject marks form===
+const open_form = document.getElementById("edit-marks-modal");
+// const edit_button = document.querySelector(".edit-btn");
+const edit_subject_id = document.getElementById("edit-subject-id");
+const edit_subject_marks = document.getElementById("edit-subject-marks");
+let editingRow = null;
+// console.log(edit_button);
+if(marks_container)
+{
+    marks_container.addEventListener("click",function(event){
+        const edit_button = event.target.closest(".edit-btn")
+        if(!edit_button) return;
+        const row = event.target.closest("tr");
+        editingRow = row;
+        const subject_id = row.querySelector(".subject-id").textContent;
+        const subject_marks = row.querySelector(".subject-marks").textContent;
+
+        edit_subject_id.value = subject_id;
+        edit_subject_marks.value = subject_marks;
+
+        open_form.style.display="flex";
+    });
+
+}
+
+// ===save edit===
+const edit_form = document.querySelector("#edit-marks-form");
+const save_button = document.querySelector(".save-btn");
+if (edit_form)
+{
+    edit_form.addEventListener("submit", async function(event){
+        event.preventDefault();
+
+        const new_id = edit_subject_id.value;
+        const new_marks = edit_subject_marks.value;
+        const marks_id = editingRow.dataset.marksId;
+        const data = {
+            "subject_id": new_id,
+            "new_marks": new_marks,
+        };
+
+        const response = await fetch(`http://127.0.0.1:5000/performance/${marks_id}`,{
+            method:"PUT",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            body:JSON.stringify(data),
+        });
+        console.log(response);
+
+        editingRow.querySelector(".subject-id").textContent = new_id;
+        editingRow.querySelector(".subject-marks").textContent = new_marks;
+
+        open_form.style.display="none";
+    });
+}
+
+// close,cancel edit modal
+if(open_form)
+{
+    const close_edit_modal = document.querySelector(".close-edit-modal");
+    close_edit_modal.addEventListener("click",function(){
+        open_form.style.display="none";
+    });
+
+    const cancel_edit_modal = document.querySelector(".cancel-edit-btn");
+    cancel_edit_modal.addEventListener("click",function(){
+        open_form.style.display="none";
+    });
+}

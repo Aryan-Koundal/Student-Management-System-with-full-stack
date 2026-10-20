@@ -163,3 +163,25 @@ def delete_marks_id_controller(marks_id):
    return jsonify({
       "message":"deleted successfully"
    }),200
+
+def edit_details_controller(marks_id):
+   data = request.json
+   print(data)
+   id = db.session.get(Marks,marks_id)
+
+   if id is None:
+      return jsonify({
+         "error":"not found"
+      }),404
+
+   subject_id = data["subject_id"]
+   marks = data["new_marks"]
+
+   id.subject_id = subject_id
+   id.marks = marks
+
+   db.session.commit()
+
+   return jsonify({
+      "message":"edited the details successfully"
+   }),200
