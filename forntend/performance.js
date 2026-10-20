@@ -235,7 +235,7 @@ async function getStudents(){
                             
                                 <button class="edit-btn" data-action="edit">
                                 ✎ Edit
-                                </button>
+                                </butgit ton>
 
                                 <button class="delete-btn" data-action="delete">
                                 🗑
