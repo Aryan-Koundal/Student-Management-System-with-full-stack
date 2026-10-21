@@ -1,6 +1,7 @@
 from flask import Flask
 # from flask_sqlalchemy import SQLAlchemy
 from routes.routes_1 import blueprint
+from routes import index
 from routes import student
 from routes import subject
 from routes import marks
@@ -20,7 +21,7 @@ db.init_app(app)
 
 app.register_blueprint(blueprint)
 print(app.url_map)
-
+print(app.url_map)
 # with app.app_context():
 #     try:
 #         db.engine.connect()
@@ -30,5 +31,3 @@ print(app.url_map)
 
 if __name__=="__main__":
     app.run(debug=True)
-
-
