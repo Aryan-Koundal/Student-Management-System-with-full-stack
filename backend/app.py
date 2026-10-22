@@ -7,6 +7,7 @@ from routes import subject
 from routes import marks
 from models.db import db
 from flask_cors import CORS
+from sqlalchemy import URL
 
 import os
 from dotenv import load_dotenv
@@ -21,8 +22,12 @@ DB_PASSWORD = os.getenv("DB_PASSWORD")
 DB_HOST = os.getenv("DB_HOST")
 DB_NAME = os.getenv("DB_NAME")
 
-app.config["SQLALCHEMY_DATABASE_URI"] = (
-    f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}"
+app.config["SQLALCHEMY_DATABASE_URI"] = URL.create(
+    "mysql+pymysql",
+    username=DB_USER,
+    password=DB_PASSWORD,
+    host=DB_HOST,
+    database=DB_NAME
 )
 
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
